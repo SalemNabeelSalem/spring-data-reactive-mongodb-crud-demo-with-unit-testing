@@ -1,0 +1,11 @@
+server:
+  port: 9094
+
+spring:
+  application:
+    name: spring-reactive-mongodb-example
+  data:
+    mongodb:
+      database: products_db
+      host: localhost
+      port: 27017
