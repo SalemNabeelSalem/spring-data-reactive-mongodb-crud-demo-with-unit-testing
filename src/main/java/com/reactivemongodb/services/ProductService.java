@@ -43,8 +43,9 @@ public class ProductService {
 
         return productRepository.findById(productId)
                 .flatMap(
-                    product -> productDtoMono.map(AppUtils::dtoToEntity).doOnNext(prod -> prod.setId(productId))
+                        product -> productDtoMono.map(AppUtils::dtoToEntity)
                 )
+                .doOnNext(product -> product.setId(productId))
                 .flatMap(productRepository::save)
                 .map(AppUtils::entityToDto)
                 .switchIfEmpty(Mono.error(new RuntimeException("Product Not Found")));
